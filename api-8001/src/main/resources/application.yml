@@ -1,0 +1,28 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: api
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+  instance:
+#    instance-id: api-8001-id #自定义服务名称
+    prefer-ip-address: true #访问路径可以显示IP
+# https://www.cnblogs.com/wfdespace/p/13268598.html
+# https://blog.csdn.net/qq_22596931/article/details/90296809
+#加上此配置，http://localhost:8002/actuator/info 页面才能打开
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"   # * 在yaml 文件属于关键字，所以需要加引号
+#http://localhost:8002/actuator/info 页面显示的信息
+info:
+  app.name: api-8001
+  company.name: www.dzh.com
+  build.artifactId: @project.artifactId@ # 用$符号取值不行，@取值可以
+  build.version: @project.version@  # 用$符号取值不行，@取值可以
